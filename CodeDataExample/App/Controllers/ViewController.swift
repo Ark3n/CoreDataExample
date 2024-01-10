@@ -10,6 +10,11 @@ import UIKit
 class ViewController: UIViewController {
     // MARK: - Properties
     
+    private let userView = UserView()
+    
+    override func loadView() {
+        view = userView
+    }
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
