@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     // MARK: - Properties
     
-    private let userView = UserView()
+    private let userView = PersonsView()
     
     override func loadView() {
         view = userView
@@ -19,12 +19,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupConstraints()
     }
     
     // MARK: - SetupUI
     private func setupUI() {
+        title = "Users"
         view.backgroundColor = .systemBackground
     }
-    private func setupConstraints() {}
 }

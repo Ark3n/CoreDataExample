@@ -8,13 +8,13 @@
 import UIKit
 import SnapKit
 
-class UserView: UIView {
+class PersonsView: UIView {
     // MARK: - Properties
     private let identifier = "user-cell"
-    private lazy var userNameTextField: UITextField = {
+    private lazy var personTextField: UITextField = {
         let tf = UITextField()
         tf.borderStyle = .roundedRect
-        tf.placeholder = "Enter your name here"
+        tf.placeholder = "Enter a person name here"
         return tf
     }()
     
@@ -28,7 +28,7 @@ class UserView: UIView {
         return button
     }()
     
-    private lazy var usersTableView: UITableView = {
+    private lazy var personsTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
         tableView.delegate = self
@@ -54,23 +54,23 @@ class UserView: UIView {
     
     // MARK: - SetupUI
     private func setupUI() {
-        addSubview(userNameTextField)
+        addSubview(personTextField)
         addSubview(pressButton)
-        addSubview(usersTableView)
+        addSubview(personsTableView)
     }
     
     private func setupConstraints() {
-        userNameTextField.snp.makeConstraints { make in
+        personTextField.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
-            make.leading.trailing.equalToSuperview().inset(10)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(50)
         }
         pressButton.snp.makeConstraints { make in
-            make.top.equalTo(userNameTextField.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(10)
+            make.top.equalTo(personTextField.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(50)
         }
-        usersTableView.snp.makeConstraints { make in
+        personsTableView.snp.makeConstraints { make in
             make.top.equalTo(pressButton.snp.bottom).offset(30)
             make.leading.trailing.bottom.equalToSuperview()
         }
@@ -78,7 +78,7 @@ class UserView: UIView {
 }
 
 // MARK: - UITableViewDelegate and UITableViewDataSource
-extension UserView: UITableViewDelegate, UITableViewDataSource {
+extension PersonsView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         10
     }
