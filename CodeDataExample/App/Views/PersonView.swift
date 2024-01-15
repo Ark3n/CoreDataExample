@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PersonView: UIView {
+final class PersonView: UIView {
     // MARK: - Properties
     
     // MARK: - View Lifecycle

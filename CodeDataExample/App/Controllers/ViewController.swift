@@ -7,9 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    // MARK: - Properties
+final class ViewController: UIViewController {
+
     
+    // MARK: - Properties
     private let userView = PersonsView()
     
     override func loadView() {
@@ -18,6 +19,7 @@ class ViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        userView.delegate = self
         setupUI()
     }
     
@@ -25,5 +27,11 @@ class ViewController: UIViewController {
     private func setupUI() {
         title = "Users"
         view.backgroundColor = .systemBackground
+    }
+}
+
+extension ViewController: PersonViewDelegate {
+    func addPerson(name: String) {
+        CoreDataManager.shared.createPerson(name)
     }
 }

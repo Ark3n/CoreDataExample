@@ -22,7 +22,7 @@ final class CoreDataManager {
     }
     
     /// Create object and save to core data
-    public func createPerson(_ name: String, dayOfBorn: String?, gender: String?, photo: Data? ) {
+    public func createPerson(_ name: String, dayOfBorn: String? = nil, gender: String? = nil, photo: Data? = nil ) {
         guard let personEntityDescription = NSEntityDescription.entity(forEntityName: "Person", in: context)
         else { fatalError("Unaible create Entity Description") }
         

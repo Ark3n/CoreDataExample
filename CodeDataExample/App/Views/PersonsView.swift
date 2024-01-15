@@ -8,13 +8,23 @@
 import UIKit
 import SnapKit
 
-class PersonsView: UIView {
+protocol PersonViewDelegate: AnyObject {
+    func addPerson(name: String)
+}
+final class PersonsView: UIView, UITextFieldDelegate {
     // MARK: - Properties
     private let identifier = "user-cell"
+    
+    weak var delegate: PersonViewDelegate?
+    private var persons: [Person] {
+        CoreDataManager.shared.featchPersons()
+    }
+    
     private lazy var personTextField: UITextField = {
         let tf = UITextField()
         tf.borderStyle = .roundedRect
         tf.placeholder = "Enter a person name here"
+        tf.delegate = self
         return tf
     }()
     
@@ -49,7 +59,9 @@ class PersonsView: UIView {
     
     // MRK: - Actions
     @objc private func pressBtnTapped() {
-        print("DEBUG: Press btn did tap")
+        guard let text = personTextField.text else { return }
+        delegate?.addPerson(name: text)
+        personsTableView.reloadData()
     }
     
     // MARK: - SetupUI
@@ -77,13 +89,23 @@ class PersonsView: UIView {
     }
 }
 
+
 // MARK: - UITableViewDelegate and UITableViewDataSource
 extension PersonsView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        persons.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        cell.textLabel?.text = persons[indexPath.row].name
         return cell
+    }
+    
+    
+    // MARK: - UITextFieldDelegate
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        personTextField.resignFirstResponder()
+        return true
     }
 }
