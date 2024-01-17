@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D86AA4762B550ED000327471 /* PersonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86AA4752B550ED000327471 /* PersonController.swift */; };
+		D86AA47E2B57B73400327471 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86AA47D2B57B73400327471 /* CustomTextField.swift */; };
 		D8CBB0892B4E967D00E653B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CBB0882B4E967D00E653B7 /* AppDelegate.swift */; };
 		D8CBB08B2B4E967D00E653B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CBB08A2B4E967D00E653B7 /* SceneDelegate.swift */; };
 		D8CBB08D2B4E967D00E653B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CBB08C2B4E967D00E653B7 /* ViewController.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D86AA4752B550ED000327471 /* PersonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonController.swift; sourceTree = "<group>"; };
+		D86AA47D2B57B73400327471 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D8CBB0852B4E967D00E653B7 /* CodeDataExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeDataExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CBB0882B4E967D00E653B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8CBB08A2B4E967D00E653B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				D8CBB08C2B4E967D00E653B7 /* ViewController.swift */,
+				D86AA4752B550ED000327471 /* PersonController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -107,6 +112,7 @@
 			children = (
 				D8CBB0A62B4E9C8B00E653B7 /* PersonsView.swift */,
 				D8CBB0B02B4EA92300E653B7 /* PersonView.swift */,
+				D86AA47D2B57B73400327471 /* CustomTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -205,7 +211,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D86AA47E2B57B73400327471 /* CustomTextField.swift in Sources */,
 				D8CBB0AE2B4EA6A000E653B7 /* Person+CoreDataProperties.swift in Sources */,
+				D86AA4762B550ED000327471 /* PersonController.swift in Sources */,
 				D8CBB08D2B4E967D00E653B7 /* ViewController.swift in Sources */,
 				D8CBB0932B4E967D00E653B7 /* CodeDataExample.xcdatamodeld in Sources */,
 				D8CBB0A72B4E9C8B00E653B7 /* PersonsView.swift in Sources */,

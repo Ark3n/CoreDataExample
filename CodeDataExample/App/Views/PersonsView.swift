@@ -99,8 +99,7 @@ extension PersonsView: UITableViewDelegate, UITableViewDataSource {
         let cell  = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         cell.textLabel?.text = persons[indexPath.row].name
         return cell
-    }
-    
+    }    
     
     // MARK: - UITextFieldDelegate
 
