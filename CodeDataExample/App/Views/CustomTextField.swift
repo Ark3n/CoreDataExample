@@ -61,6 +61,20 @@ final class CustomTextField: UITextField {
 
 
 extension UITextField {
+    
+    func addBUtton<T>(target: T, selector: Selector) {
+        self.text = "Male"
+        self.addTarget(target, action: selector, for: .touchUpInside)
+        let button = UIButton(type: .system)
+        button.setTitle("Switch", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(button)
+        
+        NSLayoutConstraint.activate([
+            button.centerYAnchor.constraint(equalTo: centerYAnchor),
+            button.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+    }
     func datePicker<T>(target: T,
                        doneAction: Selector,
                        cancelAction: Selector,

@@ -50,12 +50,17 @@ final class PersonView: UIView {
                                           doneAction: #selector(doneAction),
                                           cancelAction: #selector(cancelAction),
                                           datePickerMode: .date)
+        
+        genderTextField.addBUtton(target: self, selector: #selector(switchGenderTapped))
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    @objc
+        func switchGenderTapped() {
+            self.genderTextField.text = "Female"
+    }
     @objc
         func cancelAction() {
             self.dayOfBornTextField.resignFirstResponder()
@@ -65,7 +70,7 @@ final class PersonView: UIView {
         func doneAction() {
             if let datePickerView = self.dayOfBornTextField.inputView as? UIDatePicker {
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd-MM-yyyy" 
+                dateFormatter.dateFormat = "dd-MM-yyyy"
                 let dateString = dateFormatter.string(from: datePickerView.date)
                 self.dayOfBornTextField.text = dateString
                 self.dayOfBornTextField.resignFirstResponder()
@@ -99,5 +104,11 @@ final class PersonView: UIView {
             make.leading.equalToSuperview().offset(10)
             make.trailing.equalToSuperview().inset(10)
         }
+    }
+    
+    public func configureUI(name: String, dayOfBorn: String = "not set", gender: String = "Male") {
+        usernameTextField.text = name
+        dayOfBornTextField.text = dayOfBorn
+        genderTextField.text = gender
     }
 }

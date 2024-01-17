@@ -9,16 +9,15 @@ import UIKit
 import SnapKit
 
 protocol PersonViewDelegate: AnyObject {
+    func getPersons() -> [Person]
     func addPerson(name: String)
+    func navigateToPersonDetails(person: Person)
 }
 final class PersonsView: UIView, UITextFieldDelegate {
     // MARK: - Properties
     private let identifier = "user-cell"
     
     weak var delegate: PersonViewDelegate?
-    private var persons: [Person] {
-        CoreDataManager.shared.featchPersons()
-    }
     
     private lazy var personTextField: UITextField = {
         let tf = UITextField()
@@ -93,13 +92,25 @@ final class PersonsView: UIView, UITextFieldDelegate {
 // MARK: - UITableViewDelegate and UITableViewDataSource
 extension PersonsView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        persons.count
+        let persons = delegate?.getPersons()
+        return persons?.count ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-        cell.textLabel?.text = persons[indexPath.row].name
+        let persons = delegate?.getPersons()
+        if let person = persons?[indexPath.row], let name = person.name {
+            cell.textLabel?.text = name
+        }
         return cell
-    }    
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let persons = delegate?.getPersons()
+        if let person = persons?[indexPath.row] {
+            delegate?.navigateToPersonDetails(person: person)
+        }
+    }
     
     // MARK: - UITextFieldDelegate
 

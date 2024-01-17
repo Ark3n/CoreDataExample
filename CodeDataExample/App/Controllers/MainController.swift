@@ -7,11 +7,15 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class MainController: UIViewController {
 
     
     // MARK: - Properties
     private let userView = PersonsView()
+    
+    private var persons: [Person] {
+        CoreDataManager.shared.featchPersons()
+    }
     
     override func loadView() {
         view = userView
@@ -30,7 +34,18 @@ final class ViewController: UIViewController {
     }
 }
 
-extension ViewController: PersonViewDelegate {
+extension MainController: PersonViewDelegate {
+    func navigateToPersonDetails(person: Person) {
+        let vc = PersonController()
+        vc.person = person
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    func getPersons() -> [Person] {
+        CoreDataManager.shared.featchPersons()
+    }
+
     func addPerson(name: String) {
         CoreDataManager.shared.createPerson(name)
     }
