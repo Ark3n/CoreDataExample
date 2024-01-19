@@ -34,6 +34,7 @@ final class CustomTextField: UITextField {
     private func setupTextField(placeholder: String, systemImage: String) {
         self.placeholder = placeholder
         self.borderStyle = .none
+        self.isEnabled = false
         
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
@@ -61,12 +62,11 @@ final class CustomTextField: UITextField {
 
 
 extension UITextField {
-    
     func addBUtton<T>(target: T, selector: Selector) {
         self.text = "Male"
-        self.addTarget(target, action: selector, for: .touchUpInside)
         let button = UIButton(type: .system)
         button.setTitle("Switch", for: .normal)
+        button.addTarget(target, action: selector, for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(button)
         

@@ -59,7 +59,7 @@ final class PersonView: UIView {
     }
     @objc
         func switchGenderTapped() {
-            self.genderTextField.text = "Female"
+            genderTextField.text = "Female"
     }
     @objc
         func cancelAction() {
@@ -74,9 +74,23 @@ final class PersonView: UIView {
                 let dateString = dateFormatter.string(from: datePickerView.date)
                 self.dayOfBornTextField.text = dateString
                 self.dayOfBornTextField.resignFirstResponder()
+                print(dateString)
             }
         }
-    
+    public func isEnabled(state: Bool) {
+        switch state {
+        case true:
+            editPhotoButton.isHidden = false
+            usernameTextField.isEnabled = true
+            dayOfBornTextField.isEnabled = true
+            genderTextField.isEnabled = true
+        case false:
+            editPhotoButton.isHidden = true
+            usernameTextField.isEnabled = false
+            dayOfBornTextField.isEnabled = false
+            genderTextField.isEnabled = false
+        }
+    }
     // MARK: - SetupUI
     private func setupUI() {
         addSubview(personPhoto)

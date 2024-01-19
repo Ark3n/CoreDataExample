@@ -18,6 +18,7 @@ final class MainController: UIViewController {
     }
     
     override func loadView() {
+        super.loadView()
         view = userView
     }
     // MARK: - View Lifecycle
