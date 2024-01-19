@@ -13,6 +13,11 @@ final class PersonController: UIViewController {
     var person: Person?
     private var editMode: Bool = false
     
+    private lazy var imagePicker: ImagePickerProtocol = {
+            let imagePicker = ImagePicker(parentViewController: self)
+            return imagePicker
+        }()
+    
     // MARK: - View Lifecycle
     
     override func loadView() {
@@ -22,6 +27,7 @@ final class PersonController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        personView.delegate = self
         setupUI()
         setupConstraints()
         configureNavigationBarItem()
@@ -48,6 +54,7 @@ final class PersonController: UIViewController {
             sender.title = "Edit"
             editMode = false
             personView.isEnabled(state: editMode)
+            personView.prepareForCoreDta()
         }
     }
     
@@ -56,4 +63,12 @@ final class PersonController: UIViewController {
         view.backgroundColor = .systemBackground
     }
     private func setupConstraints() {}
+}
+
+extension PersonController: PersonViewDelegate {
+    func editPhotoTapped() {
+        imagePicker.startImagePicker(withSourceType: .photoLibrary) { [weak self] image in
+            self!.personView.assignPhoto(image: image)
+        }
+    }
 }

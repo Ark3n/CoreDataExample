@@ -54,15 +54,15 @@ final class CoreDataManager {
         }
     }
     
-    public func updatePerson(with newPerson: Person) {
+    public func updatePerson(_ name: String?, dayOfBorn: String? = nil, gender: String? = nil, photo: Data? = nil) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
         do {
             guard let persons = try? context.fetch(fetchRequest) as? [Person],
-                  let person = persons.first(where: {$0.name == newPerson.name}) else { return }
-            person.name = newPerson.name
-            person.dayOfBorn = newPerson.dayOfBorn
-            person.gender = newPerson.gender
-            person.photo = newPerson.photo
+                  let person = persons.first(where: {$0.name == name}) else { return }
+            person.name = name
+            person.dayOfBorn = dayOfBorn
+            person.gender = gender
+            person.photo = photo
         }
         appDelegate.saveContext()
     }

@@ -8,13 +8,18 @@
 import UIKit
 import SnapKit
 
+protocol PersonViewDelegate: AnyObject {
+    func editPhotoTapped()
+}
+
 final class PersonView: UIView {
     // MARK: - Properties
     private let identifier = "user-details-cell"
+    weak var delegate: PersonViewDelegate?
     private lazy var personPhoto: UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 200 / 2
         iv.backgroundColor = .systemGray3
         return iv
@@ -27,6 +32,7 @@ final class PersonView: UIView {
         button.tintColor = .white
         button.layer.cornerRadius = 10
         button.isHidden = true
+        button.addTarget(self, action: #selector(editPhotoBtnTapped), for: .touchUpInside)
         return button
     }()
     
@@ -57,17 +63,18 @@ final class PersonView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    @objc
-        func switchGenderTapped() {
+    
+    @objc func editPhotoBtnTapped() {
+        delegate?.editPhotoTapped()
+    }
+    @objc func switchGenderTapped() {
             genderTextField.text = "Female"
     }
-    @objc
-        func cancelAction() {
+    @objc func cancelAction() {
             self.dayOfBornTextField.resignFirstResponder()
         }
 
-        @objc
-        func doneAction() {
+        @objc func doneAction() {
             if let datePickerView = self.dayOfBornTextField.inputView as? UIDatePicker {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy"
@@ -77,6 +84,9 @@ final class PersonView: UIView {
                 print(dateString)
             }
         }
+    public func assignPhoto(image: UIImage) {
+        personPhoto.image = image
+    }
     public func isEnabled(state: Bool) {
         switch state {
         case true:
@@ -119,7 +129,11 @@ final class PersonView: UIView {
             make.trailing.equalToSuperview().inset(10)
         }
     }
-    
+    public func prepareForCoreDta() {
+        let user = usernameTextField.text
+        CoreDataManager.shared.updatePerson(user)
+        print(user)
+    }
     public func configureUI(name: String, dayOfBorn: String = "not set", gender: String = "Male") {
         usernameTextField.text = name
         dayOfBornTextField.text = dayOfBorn

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-protocol PersonViewDelegate: AnyObject {
+protocol PersonsViewDelegate: AnyObject {
     func getPersons() -> [Person]
     func addPerson(name: String)
     func navigateToPersonDetails(person: Person)
@@ -17,7 +17,7 @@ final class PersonsView: UIView, UITextFieldDelegate {
     // MARK: - Properties
     private let identifier = "user-cell"
     
-    weak var delegate: PersonViewDelegate?
+    weak var delegate: PersonsViewDelegate?
     
     private lazy var personTextField: UITextField = {
         let tf = UITextField()

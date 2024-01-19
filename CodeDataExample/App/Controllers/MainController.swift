@@ -35,7 +35,7 @@ final class MainController: UIViewController {
     }
 }
 
-extension MainController: PersonViewDelegate {
+extension MainController: PersonsViewDelegate {
     func navigateToPersonDetails(person: Person) {
         let vc = PersonController()
         vc.person = person
